@@ -114,7 +114,7 @@ namespace CCSWE.nanoFramework.Mediator
 
             if (_subscribers.Contains(eventName))
             {
-                foreach (IMediatorSubscriber subscriber in (ArrayList)_subscribers[eventName])
+                foreach (IMediatorEventHandler subscriber in (ArrayList)_subscribers[eventName])
                 {
                     subscriber.HandleEvent(mediatorEvent);
                 }
@@ -125,10 +125,10 @@ namespace CCSWE.nanoFramework.Mediator
                 foreach (Type subscriberType in (ArrayList)_subscriberTypes[eventName])
                 {
                     var service = _serviceProvider.GetService(subscriberType);
-                    if (service is not IMediatorSubscriber subscriber)
+                    if (service is not IMediatorEventHandler subscriber)
                     {
                         // Should I just log an error here instead?
-                        throw new InvalidOperationException($"{service.GetType().FullName} registered as {subscriberType.FullName} does not implement {nameof(IMediatorSubscriber)}");
+                        throw new InvalidOperationException($"{service.GetType().FullName} registered as {subscriberType.FullName} does not implement {nameof(IMediatorEventHandler)}");
                     }
                     subscriber.HandleEvent(mediatorEvent);
                 }
@@ -195,21 +195,21 @@ namespace CCSWE.nanoFramework.Mediator
         }
 
         /// <inheritdoc />
-        public void Subscribe(Type eventType, IMediatorSubscriber subscriber)
+        public void Subscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
             MediatorTypeUtils.RequireMediatorEvent(eventType);
 
             var eventName = eventType.FullName;
             if (!_subscribers.Contains(eventName))
             {
-                _subscribers.Add(eventName, new ArrayList { subscriber });
+                _subscribers.Add(eventName, new ArrayList { eventHandler });
                 return;
             }
 
             var subscribers = (ArrayList)_subscribers[eventName];
-            if (!subscribers.Contains(subscriber))
+            if (!subscribers.Contains(eventHandler))
             {
-                subscribers.Add(subscriber);
+                subscribers.Add(eventHandler);
             }
         }
 
@@ -233,7 +233,7 @@ namespace CCSWE.nanoFramework.Mediator
         }
 
         /// <inheritdoc />
-        public void Unsubscribe(Type eventType, IMediatorSubscriber subscriber)
+        public void Unsubscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
             var eventName = eventType.FullName;
             if (!_subscribers.Contains(eventName))
@@ -242,9 +242,9 @@ namespace CCSWE.nanoFramework.Mediator
             }
 
             var subscribers = (ArrayList)_subscribers[eventName];
-            if (subscribers.Contains(subscriber))
+            if (subscribers.Contains(eventHandler))
             {
-                subscribers.Remove(subscriber);
+                subscribers.Remove(eventHandler);
             }
         }
 

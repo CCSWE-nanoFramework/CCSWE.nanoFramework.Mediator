@@ -1,5 +1,5 @@
 ﻿using System;
-using CCSWE.nanoFramework.Mediator.Test.Shared;
+using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
 using nanoFramework.DependencyInjection;
 using nanoFramework.TestFramework;
 
@@ -24,7 +24,7 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions
             serviceCollection.AddMediator(options =>
             {
                 options.DelayedStart = true;
-                options.AddSubscriber(typeof(MediatorEventMock), typeof(IMediatorSubscriberMock));
+                options.AddSubscriber(typeof(MediatorEventMock), typeof(IMediatorEventHandlerMock));
             });
 
             var serviceProvider = serviceCollection.BuildServiceProvider();

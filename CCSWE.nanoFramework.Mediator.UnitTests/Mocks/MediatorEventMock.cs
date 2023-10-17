@@ -1,12 +1,8 @@
 ﻿using System;
 
-namespace CCSWE.nanoFramework.Mediator.Test.Shared
+namespace CCSWE.nanoFramework.Mediator.UnitTests.Mocks
 {
-    public interface IMediatorEventMock
-    {
-    }
-
-    public class MediatorEventMock: IMediatorEvent, IMediatorEventMock
+    public class MediatorEventMock: IMediatorEvent
     {
         public Guid Id { get; } = Guid.NewGuid();
 

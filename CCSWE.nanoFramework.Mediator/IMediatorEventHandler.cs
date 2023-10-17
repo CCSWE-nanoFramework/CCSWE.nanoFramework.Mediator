@@ -1,6 +1,6 @@
 ﻿namespace CCSWE.nanoFramework.Mediator
 {
-    public interface IMediatorSubscriber
+    public interface IMediatorEventHandler
     {
         void HandleEvent(IMediatorEvent mediatorEvent);
     }

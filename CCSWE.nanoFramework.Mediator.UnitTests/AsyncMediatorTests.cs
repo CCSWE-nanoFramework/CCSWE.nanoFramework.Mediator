@@ -1,7 +1,7 @@
-﻿using CCSWE.nanoFramework.Mediator.Test.Shared;
-using nanoFramework.TestFramework;
+﻿using nanoFramework.TestFramework;
 using System;
 using System.Threading;
+using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
 using nanoFramework.DependencyInjection;
 
 namespace CCSWE.nanoFramework.Mediator.UnitTests
@@ -16,15 +16,15 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
         {
             // Arrange
             var mediatorEvent = new MediatorEventMock();
-            var mediatorSubscriber = new MediatorSubscriberMock();
+            var mediatorSubscriber = new MediatorEventHandlerMock();
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton(typeof(IMediatorSubscriberMock), mediatorSubscriber);
+            serviceCollection.AddSingleton(typeof(IMediatorEventHandlerMock), mediatorSubscriber);
 
             using var sut = new AsyncMediator(serviceCollection.BuildServiceProvider());
             sut.Start();
 
             // Act
-            sut.Subscribe(typeof(MediatorEventMock), typeof(IMediatorSubscriberMock));
+            sut.Subscribe(typeof(MediatorEventMock), typeof(IMediatorEventHandlerMock));
             sut.Publish(mediatorEvent);
 
             WaitForPublisherThread();
@@ -39,7 +39,7 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
         {
             // Arrange
             var mediatorEvent = new MediatorEventMock();
-            var mediatorSubscriber = new MediatorSubscriberMock();
+            var mediatorSubscriber = new MediatorEventHandlerMock();
 
             using var sut = new AsyncMediator(new ServiceCollection().BuildServiceProvider());
             sut.Start();
@@ -61,16 +61,16 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             // Arrange
             var mediatorEvent = new MediatorEventMock();
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton(typeof(IMediatorSubscriberMock), typeof(MediatorSubscriberMock));
+            serviceCollection.AddSingleton(typeof(IMediatorEventHandlerMock), typeof(MediatorEventHandlerMock));
             var serviceProvider = serviceCollection.BuildServiceProvider();
-            var mediatorSubscriber = (MediatorSubscriberMock)serviceProvider.GetRequiredService(typeof(IMediatorSubscriberMock));
+            var mediatorSubscriber = (MediatorEventHandlerMock)serviceProvider.GetRequiredService(typeof(IMediatorEventHandlerMock));
 
             using var sut = new AsyncMediator(serviceCollection.BuildServiceProvider());
             sut.Start();
 
             // Act
-            sut.Subscribe(typeof(MediatorEventMock), typeof(IMediatorSubscriberMock));
-            sut.Unsubscribe(typeof(MediatorEventMock), typeof(IMediatorSubscriberMock));
+            sut.Subscribe(typeof(MediatorEventMock), typeof(IMediatorEventHandlerMock));
+            sut.Unsubscribe(typeof(MediatorEventMock), typeof(IMediatorEventHandlerMock));
             sut.Publish(mediatorEvent);
 
             WaitForPublisherThread();
@@ -85,7 +85,7 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
         {
             // Arrange
             var mediatorEvent = new MediatorEventMock();
-            var mediatorSubscriber = new MediatorSubscriberMock();
+            var mediatorSubscriber = new MediatorEventHandlerMock();
 
             using var sut = new AsyncMediator(new ServiceCollection().BuildServiceProvider());
             sut.Start();

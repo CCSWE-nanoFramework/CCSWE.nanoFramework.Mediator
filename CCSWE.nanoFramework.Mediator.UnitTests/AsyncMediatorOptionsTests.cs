@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using CCSWE.nanoFramework.Mediator.Test.Shared;
+using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
 using nanoFramework.TestFramework;
 
 namespace CCSWE.nanoFramework.Mediator.UnitTests
@@ -15,7 +15,7 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             var sut = new AsyncMediatorOptions();
 
             // Act
-            sut.AddSubscriber(typeof(MediatorEventMock), typeof(IMediatorSubscriberMock));
+            sut.AddSubscriber(typeof(MediatorEventMock), typeof(IMediatorEventHandlerMock));
 
             // Assert
             Assert.AreEqual(1, sut.Subscribers.Count);
@@ -28,7 +28,7 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             var sut = new AsyncMediatorOptions();
 
             // Act
-            Assert.ThrowsException(typeof(ArgumentException), () => sut.AddSubscriber(typeof(ArrayList), typeof(MediatorSubscriberMock)));
+            Assert.ThrowsException(typeof(ArgumentException), () => sut.AddSubscriber(typeof(ArrayList), typeof(MediatorEventHandlerMock)));
 
             // Assert
             Assert.AreEqual(0, sut.Subscribers.Count);
