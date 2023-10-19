@@ -11,6 +11,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8B8EDBF6
 EndProject
 Project("{11A8DD76-328B-46DF-9F39-F559912D0360}") = "CCSWE.nanoFramework.Mediator.UnitTests", "CCSWE.nanoFramework.Mediator.UnitTests\CCSWE.nanoFramework.Mediator.UnitTests.nfproj", "{1D08C8BF-BC0C-4710-9350-6495079A4571}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FE4D86DD-6E0A-4D33-A91A-728292495EF6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub Actions", "GitHub Actions", "{661E1AA0-550C-40E0-807A-95B6453C482E}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\nf-build-and-publish.yml = .github\workflows\nf-build-and-publish.yml
+		.github\workflows\nf-update-dependencies.yml = .github\workflows\nf-update-dependencies.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +44,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{72FFFAE7-CA93-46C1-A8E9-9FC1F78830B0} = {01189C62-816B-4D18-9713-4407B4D09957}
 		{1D08C8BF-BC0C-4710-9350-6495079A4571} = {8B8EDBF6-151F-4873-9CE8-4E8793855DA9}
+		{661E1AA0-550C-40E0-807A-95B6453C482E} = {FE4D86DD-6E0A-4D33-A91A-728292495EF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE56B956-7F19-4F5C-A578-4CA03B448964}
