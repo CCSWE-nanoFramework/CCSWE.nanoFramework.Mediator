@@ -12,7 +12,7 @@ jobs:
     timeout-minutes: 15
     runs-on: windows-latest
     env:
-      SOLUTION: 'CCSWE.nanoFramework.Mediator'
+      SOLUTION: 'CCSWE.nanoFramework.Mediator.sln'
 #      BUILD_PLATFORM: 'Any CPU'
       BUILD_CONFIGURATION: 'Release'
 #      classLibName: 'nanoFramework.MikroClick.Drivers'
@@ -42,7 +42,7 @@ jobs:
           setAllVars: true
 
       - name: Install dependencies
-        run: nuget restore ${{ env.SOLUTION }} -ConfigFile NuGet.Config
+        run: nuget restore ${{ env.SOLUTION }} # -ConfigFile NuGet.Config
 
       - name: Build
         run: msbuild ${{ env.SOLUTION }} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:AssemblyVersion=${{ env.NBGV_AssemblyVersion }} /p:FileVersion=${{ env.NBGV_AssemblyFileVersion }} /p:InformationalVersion=${{ env.NBGV_AssemblyInformationalVersion }}
