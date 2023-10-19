@@ -1,0 +1,51 @@
+name: Build nanoFramework library and release nuget (if applicable)
+
+on: [push, pull_request]
+
+defaults:
+  run:
+    shell: pwsh
+
+jobs:
+  build-drivers:
+    name: Build nanoFramework/MBN Click Drivers
+    timeout-minutes: 15
+    runs-on: windows-latest
+    env:
+      solution: 'CCSWE.nanoFramework.Mediator'
+      buildPlatform: 'Any CPU'
+      buildConfiguration: 'Release'
+      classLibName: 'nanoFramework.MikroClick.Drivers'
+      nugetPackageName: 'nanoFramework.ClickDrivers'
+      GITHUB_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup nanoFramework
+        uses: nanoframework/nanobuild@v1
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          msbuild-architecture: x64
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+
+      - name: Setup Nerdbank.GitVersioning
+        uses: dotnet/nbgv@v0.4.1
+        with:
+          setAllVars: true
+
+      - name: Install dependencies
+        run: nuget restore ${{ env.solution }} # -ConfigFile NuGet.Config
+
+      - name: Build
+        run: msbuild ${{ env.solution }} /p:Configuration=${{ env.buildConfiguration }} /p:AssemblyVersion=${{ env.NBGV_AssemblyVersion }} /p:FileVersion=${{ env.NBGV_AssemblyFileVersion }} /p:InformationalVersion=${{ env.NBGV_AssemblyInformationalVersion }}
+
+# TODO: Add tests
+
