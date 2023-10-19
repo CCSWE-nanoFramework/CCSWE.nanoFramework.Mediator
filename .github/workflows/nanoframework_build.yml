@@ -8,15 +8,15 @@ defaults:
 
 jobs:
   build-drivers:
-    name: Build nanoFramework/MBN Click Drivers
+    name: Build nanoFramework library
     timeout-minutes: 15
     runs-on: windows-latest
     env:
-      solution: 'CCSWE.nanoFramework.Mediator'
-      buildPlatform: 'Any CPU'
-      buildConfiguration: 'Release'
-      classLibName: 'nanoFramework.MikroClick.Drivers'
-      nugetPackageName: 'nanoFramework.ClickDrivers'
+      SOLUTION: 'CCSWE.nanoFramework.Mediator'
+#      BUILD_PLATFORM: 'Any CPU'
+      BUILD_CONFIGURATION: 'Release'
+#      classLibName: 'nanoFramework.MikroClick.Drivers'
+#      nugetPackageName: 'nanoFramework.ClickDrivers'
       GITHUB_TOKEN: ${{ github.token }}
 
     steps:
@@ -42,10 +42,10 @@ jobs:
           setAllVars: true
 
       - name: Install dependencies
-        run: nuget restore ${{ env.solution }} # -ConfigFile NuGet.Config
+        run: nuget restore ${{ env.SOLUTION }} -ConfigFile NuGet.Config
 
       - name: Build
-        run: msbuild ${{ env.solution }} /p:Configuration=${{ env.buildConfiguration }} /p:AssemblyVersion=${{ env.NBGV_AssemblyVersion }} /p:FileVersion=${{ env.NBGV_AssemblyFileVersion }} /p:InformationalVersion=${{ env.NBGV_AssemblyInformationalVersion }}
+        run: msbuild ${{ env.SOLUTION }} /p:Configuration=${{ env.BUILD_CONFIGURATION }} /p:AssemblyVersion=${{ env.NBGV_AssemblyVersion }} /p:FileVersion=${{ env.NBGV_AssemblyFileVersion }} /p:InformationalVersion=${{ env.NBGV_AssemblyInformationalVersion }}
 
 # TODO: Add tests
 
