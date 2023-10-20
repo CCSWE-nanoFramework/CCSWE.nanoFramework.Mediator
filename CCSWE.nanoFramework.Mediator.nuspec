@@ -24,6 +24,6 @@
 	</metadata>
 	<files>
 		<file src="CCSWE.nanoFramework.Mediator\bin\Release\CCSWE.nanoFramework.Mediator.*" target="lib"/>
-		<file src="LICENSE.md" target=""/>
+		<file src="LICENSE" target=""/>
 	</files>
 </package>

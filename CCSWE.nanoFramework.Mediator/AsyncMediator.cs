@@ -19,11 +19,20 @@ namespace CCSWE.nanoFramework.Mediator
         private readonly Hashtable _subscriberTypes = new();
         private readonly object _syncLock = new();
 
+        /// <summary>
+        /// Create a new instance of <see cref="AsyncMediator"/>
+        /// </summary>
+        /// <param name="serviceProvider">The <see cref="IServiceProvider"/> use to location singleton subscribers.</param>
         public AsyncMediator(IServiceProvider serviceProvider) 
         {
             _serviceProvider = serviceProvider;
         }
 
+        /// <summary>
+        /// Create a new instance of <see cref="AsyncMediator"/>
+        /// </summary>
+        /// <param name="options">The <see cref="AsyncMediatorOptions"/> used to configure this <see cref="AsyncMediator"/>.</param>
+        /// <param name="serviceProvider">The <see cref="IServiceProvider"/> use to location singleton subscribers.</param>
         public AsyncMediator(AsyncMediatorOptions options, IServiceProvider serviceProvider): this(serviceProvider)
         {
             foreach (MediatorOptionsSubscriber subscriber in options.Subscribers)
@@ -37,14 +46,17 @@ namespace CCSWE.nanoFramework.Mediator
             }
         }
 
+        /// <summary>
+        /// No summary needed...
+        /// </summary>
         ~AsyncMediator()
         {
             Dispose(false);
         }
 
-        protected CancellationToken CancellationToken => CancellationTokenSource.Token;
+        private CancellationToken CancellationToken => CancellationTokenSource.Token;
 
-        protected CancellationTokenSource CancellationTokenSource { get; } = new();
+        private CancellationTokenSource CancellationTokenSource { get; } = new();
 
         private void CheckPublishThread()
         {
@@ -62,6 +74,7 @@ namespace CCSWE.nanoFramework.Mediator
             }
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             if (_disposed)
@@ -108,7 +121,7 @@ namespace CCSWE.nanoFramework.Mediator
             }
         }
 
-        public void PublishInternal(IMediatorEvent mediatorEvent)
+        private void PublishInternal(IMediatorEvent mediatorEvent)
         {
             var eventName = mediatorEvent.GetType().FullName;
 

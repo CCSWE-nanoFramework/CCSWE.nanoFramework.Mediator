@@ -15,7 +15,7 @@
     <RootNamespace>CCSWE.nanoFramework.Mediator</RootNamespace>
     <AssemblyName>CCSWE.nanoFramework.Mediator</AssemblyName>
     <TargetFrameworkVersion>v1.0</TargetFrameworkVersion>
-	<DocumentationFile>bin\$(Configuration)\CCSWE.nanoFramework.Mediator.xml</DocumentationFile>
+    <DocumentationFile>bin\$(Configuration)\CCSWE.nanoFramework.Mediator.xml</DocumentationFile>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.props" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.props')" />

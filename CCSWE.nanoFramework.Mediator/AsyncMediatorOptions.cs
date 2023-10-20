@@ -4,6 +4,9 @@ using System;
 
 namespace CCSWE.nanoFramework.Mediator
 {
+    /// <summary>
+    /// Options used to configure <see cref="AsyncMediator"/>.
+    /// </summary>
     public class AsyncMediatorOptions
     {
         /// <summary>
