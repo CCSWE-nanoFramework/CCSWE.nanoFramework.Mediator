@@ -19,11 +19,20 @@ namespace CCSWE.nanoFramework.Mediator
         private readonly Hashtable _subscriberTypes = new();
         private readonly object _syncLock = new();
 
+        /// <summary>
+        /// Create a new instance of <see cref="AsyncMediator"/>
+        /// </summary>
+        /// <param name="serviceProvider">The <see cref="IServiceProvider"/> use to location singleton subscribers.</param>
         public AsyncMediator(IServiceProvider serviceProvider) 
         {
             _serviceProvider = serviceProvider;
         }
 
+        /// <summary>
+        /// Create a new instance of <see cref="AsyncMediator"/>
+        /// </summary>
+        /// <param name="options">The <see cref="AsyncMediatorOptions"/> used to configure this <see cref="AsyncMediator"/>.</param>
+        /// <param name="serviceProvider">The <see cref="IServiceProvider"/> use to location singleton subscribers.</param>
         public AsyncMediator(AsyncMediatorOptions options, IServiceProvider serviceProvider): this(serviceProvider)
         {
             foreach (MediatorOptionsSubscriber subscriber in options.Subscribers)
@@ -37,14 +46,17 @@ namespace CCSWE.nanoFramework.Mediator
             }
         }
 
+        /// <summary>
+        /// No summary needed...
+        /// </summary>
         ~AsyncMediator()
         {
             Dispose(false);
         }
 
-        protected CancellationToken CancellationToken => CancellationTokenSource.Token;
+        private CancellationToken CancellationToken => CancellationTokenSource.Token;
 
-        protected CancellationTokenSource CancellationTokenSource { get; } = new();
+        private CancellationTokenSource CancellationTokenSource { get; } = new();
 
         private void CheckPublishThread()
         {
@@ -62,6 +74,7 @@ namespace CCSWE.nanoFramework.Mediator
             }
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             if (_disposed)
@@ -108,13 +121,13 @@ namespace CCSWE.nanoFramework.Mediator
             }
         }
 
-        public void PublishInternal(IMediatorEvent mediatorEvent)
+        private void PublishInternal(IMediatorEvent mediatorEvent)
         {
             var eventName = mediatorEvent.GetType().FullName;
 
             if (_subscribers.Contains(eventName))
             {
-                foreach (IMediatorSubscriber subscriber in (ArrayList)_subscribers[eventName])
+                foreach (IMediatorEventHandler subscriber in (ArrayList)_subscribers[eventName])
                 {
                     subscriber.HandleEvent(mediatorEvent);
                 }
@@ -125,10 +138,10 @@ namespace CCSWE.nanoFramework.Mediator
                 foreach (Type subscriberType in (ArrayList)_subscriberTypes[eventName])
                 {
                     var service = _serviceProvider.GetService(subscriberType);
-                    if (service is not IMediatorSubscriber subscriber)
+                    if (service is not IMediatorEventHandler subscriber)
                     {
                         // Should I just log an error here instead?
-                        throw new InvalidOperationException($"{service.GetType().FullName} registered as {subscriberType.FullName} does not implement {nameof(IMediatorSubscriber)}");
+                        throw new InvalidOperationException($"{service.GetType().FullName} registered as {subscriberType.FullName} does not implement {nameof(IMediatorEventHandler)}");
                     }
                     subscriber.HandleEvent(mediatorEvent);
                 }
@@ -195,21 +208,21 @@ namespace CCSWE.nanoFramework.Mediator
         }
 
         /// <inheritdoc />
-        public void Subscribe(Type eventType, IMediatorSubscriber subscriber)
+        public void Subscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
             MediatorTypeUtils.RequireMediatorEvent(eventType);
 
             var eventName = eventType.FullName;
             if (!_subscribers.Contains(eventName))
             {
-                _subscribers.Add(eventName, new ArrayList { subscriber });
+                _subscribers.Add(eventName, new ArrayList { eventHandler });
                 return;
             }
 
             var subscribers = (ArrayList)_subscribers[eventName];
-            if (!subscribers.Contains(subscriber))
+            if (!subscribers.Contains(eventHandler))
             {
-                subscribers.Add(subscriber);
+                subscribers.Add(eventHandler);
             }
         }
 
@@ -233,7 +246,7 @@ namespace CCSWE.nanoFramework.Mediator
         }
 
         /// <inheritdoc />
-        public void Unsubscribe(Type eventType, IMediatorSubscriber subscriber)
+        public void Unsubscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
             var eventName = eventType.FullName;
             if (!_subscribers.Contains(eventName))
@@ -242,9 +255,9 @@ namespace CCSWE.nanoFramework.Mediator
             }
 
             var subscribers = (ArrayList)_subscribers[eventName];
-            if (subscribers.Contains(subscriber))
+            if (subscribers.Contains(eventHandler))
             {
-                subscribers.Remove(subscriber);
+                subscribers.Remove(eventHandler);
             }
         }
 

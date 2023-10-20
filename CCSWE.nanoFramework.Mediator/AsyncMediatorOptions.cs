@@ -4,6 +4,9 @@ using System;
 
 namespace CCSWE.nanoFramework.Mediator
 {
+    /// <summary>
+    /// Options used to configure <see cref="AsyncMediator"/>.
+    /// </summary>
     public class AsyncMediatorOptions
     {
         /// <summary>
@@ -17,7 +20,7 @@ namespace CCSWE.nanoFramework.Mediator
         /// Adds a singleton subscriber to an event.
         /// </summary>
         /// <param name="eventType">Type of the event. The event must implement <see cref="IMediatorEvent"/>.</param>
-        /// <param name="subscriberType">Type of the subscriber (as registered in DI). The subscriber must implement <see cref="IMediatorSubscriber"/>.</param>
+        /// <param name="subscriberType">Type of the subscriber (as registered in DI). The subscriber must implement <see cref="IMediatorEventHandler"/>.</param>
         public void AddSubscriber(Type eventType, Type subscriberType)
         {
             MediatorTypeUtils.RequireMediatorEvent(eventType);
