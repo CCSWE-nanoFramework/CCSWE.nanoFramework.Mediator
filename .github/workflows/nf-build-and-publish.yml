@@ -13,11 +13,10 @@ jobs:
     runs-on: windows-latest
     env:
       SOLUTION: 'CCSWE.nanoFramework.Mediator.sln'
-#      BUILD_PLATFORM: 'Any CPU'
       BUILD_CONFIGURATION: 'Release'
 #      classLibName: 'nanoFramework.MikroClick.Drivers'
-#      nugetPackageName: 'nanoFramework.ClickDrivers'
       GITHUB_TOKEN: ${{ github.token }}
+      NUGET_PACKAGE_NAME: 'CCSWE.nanoFramework.Mediator'
 
     steps:
       - name: Checkout
@@ -50,7 +49,7 @@ jobs:
       # TODO: Add tests
 
       - name: Build NuGet package
-        run: nuget pack ${{ env.nugetPackageName }}.nuspec -Version ${{ env.NBGV_NuGetPackageVersion }} -Symbols -SymbolPackageFormat snupkg -properties Configuration=${{ env.BUILD_CONFIGURATION }}
+        run: nuget pack ${{ env.NUGET_PACKAGE_NAME }}.nuspec -Version ${{ env.NBGV_NuGetPackageVersion }} -Symbols -SymbolPackageFormat snupkg -properties Configuration=${{ env.BUILD_CONFIGURATION }}
 
       - name: Upload NuGet artifacts
         uses: actions/upload-artifact@v3
