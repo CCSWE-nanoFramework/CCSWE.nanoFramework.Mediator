@@ -8,6 +8,8 @@ name: Daily update dependencies
 on: 
   #push:
   #pull_request:
+  workflow_dispatch:
+  
   schedule:
   # At 00:00 UTC every day.
   - cron:  '0 0 * * 0'

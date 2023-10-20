@@ -7,7 +7,7 @@
 		<!--<version>$version$</version>-->
 		<authors>Cory Charlton</authors>
 		<owners>Cory Charlton,CCSWE</owners>
-		<license type="file">LICENSE</license>
+		<!--<license type="file">LICENSE</license>-->
 		<projectUrl>https://github.com/CoryCharlton/CCSWE.nanoFramework.Mediator</projectUrl>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
 		<developmentDependency>false</developmentDependency>
@@ -24,6 +24,6 @@
 	</metadata>
 	<files>
 		<file src="CCSWE.nanoFramework.Mediator\bin\Release\CCSWE.nanoFramework.Mediator.*" target="lib"/>
-		<file src="LICENSE" target=""/>
+		<!--<file src="LICENSE" target=""/>-->
 	</files>
 </package>

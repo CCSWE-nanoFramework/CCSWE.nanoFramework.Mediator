@@ -48,13 +48,18 @@ jobs:
 
       # TODO: Add tests
 
-      - name: Build NuGet package
+      - name: Build NuGet packages
         run: nuget pack ${{ env.NUGET_PACKAGE_NAME }}.nuspec -Version ${{ env.NBGV_NuGetPackageVersion }} -Symbols -SymbolPackageFormat snupkg -properties Configuration=${{ env.BUILD_CONFIGURATION }}
 
-      - name: Upload NuGet artifacts
+      - name: Upload NuGet packages
         uses: actions/upload-artifact@v3
         with:
           name: nuget-packages
           path: |
             ${{ github.workspace }}\**\*.nupkg
             ${{ github.workspace }}\**\*.snupkg
+
+      - name: Publish NuGet packages to nuget.org
+        if: startsWith(github.ref, 'refs/heads/master')
+        run: |
+          nuget push "**/${{ env.NUGET_PACKAGE_NAME }}*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{ secrets.NUGET_ORG_API_KEY }} -SkipDuplicate
