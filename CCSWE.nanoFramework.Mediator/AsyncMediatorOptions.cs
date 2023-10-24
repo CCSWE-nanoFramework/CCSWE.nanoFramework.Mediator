@@ -1,6 +1,7 @@
 ﻿using CCSWE.nanoFramework.Mediator.Internal;
 using System.Collections;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace CCSWE.nanoFramework.Mediator
 {
@@ -13,6 +14,11 @@ namespace CCSWE.nanoFramework.Mediator
         /// Controls whether the <see cref="AsyncMediator"/> is started immediately or is delayed until the first message is published.
         /// </summary>
         public bool DelayedStart { get; set; } = false;
+
+        /// <summary>
+        /// The default <see cref="LogLevel"/> used for debug log messages.
+        /// </summary>
+        public LogLevel LogLevel { get; set; } = LogLevel.Trace;
 
         internal ArrayList Subscribers { get; } = new();
 
