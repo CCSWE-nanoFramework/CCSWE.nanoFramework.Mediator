@@ -125,7 +125,7 @@ namespace CCSWE.nanoFramework.Mediator
 
             lock (_syncLock)
             {
-                DebugLog("Queueing event {mediatorEvent.GetType().Name}");
+                DebugLog($"Queueing event {mediatorEvent.GetType().Name}");
 
                 _eventQueue.Enqueue(mediatorEvent);
                 _eventWaiting.Set();
@@ -173,7 +173,7 @@ namespace CCSWE.nanoFramework.Mediator
 
                 while (eventToPublish is not null)
                 {
-                    DebugLog("Publishing event {eventToPublish.GetType().Name}");
+                    DebugLog($"Publishing event {eventToPublish.GetType().Name}");
 
                     PublishInternal(eventToPublish);
 
@@ -194,7 +194,7 @@ namespace CCSWE.nanoFramework.Mediator
                         return;
                     }
 
-                    DebugLog("Starting publisher thread");
+                    DebugLog($"Starting publisher thread");
 
                     _publishThread = new Thread(PublishThread);
                     _publishThread.Start();
@@ -213,7 +213,7 @@ namespace CCSWE.nanoFramework.Mediator
                 return;
             }
 
-            DebugLog("Stopping publisher thread");
+            DebugLog($"Stopping publisher thread");
 
             try
             {
@@ -233,7 +233,7 @@ namespace CCSWE.nanoFramework.Mediator
         {
             MediatorTypeUtils.RequireMediatorEvent(eventType);
 
-            DebugLog("Adding subscriber: {eventType.Name} - {eventHandler.GetType().Name}");
+            DebugLog($"Adding subscriber: {eventType.Name} - {eventHandler.GetType().Name}");
          
             var eventName = eventType.FullName;
             if (!_subscribers.Contains(eventName))
@@ -255,7 +255,7 @@ namespace CCSWE.nanoFramework.Mediator
         {
             MediatorTypeUtils.RequireMediatorEvent(eventType);
 
-            DebugLog("Adding subscriber: {eventType.Name} - {subscriberType.Name}");
+            DebugLog($"Adding subscriber: {eventType.Name} - {subscriberType.Name}");
 
             var eventName = eventType.FullName;
             if (!_subscriberTypes.Contains(eventName))
@@ -274,7 +274,7 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Unsubscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
-            DebugLog("Removing subscriber: {eventType.Name} - {eventHandler.GetType().Name}");
+            DebugLog($"Removing subscriber: {eventType.Name} - {eventHandler.GetType().Name}");
          
             var eventName = eventType.FullName;
             if (!_subscribers.Contains(eventName))
@@ -292,7 +292,7 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Unsubscribe(Type eventType, Type subscriberType)
         {
-            DebugLog("Removing subscriber: {eventType.Name} - {subscriberType.Name}");
+            DebugLog($"Removing subscriber: {eventType.Name} - {subscriberType.Name}");
           
             var eventName = eventType.FullName;
             if (!_subscriberTypes.Contains(eventName))
