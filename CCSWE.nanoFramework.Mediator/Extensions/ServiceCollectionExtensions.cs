@@ -9,12 +9,6 @@ namespace CCSWE.nanoFramework.Mediator
     public static class ServiceCollectionExtensions
     {
         /// <summary>
-        /// An action for configuring the <see cref="AsyncMediator"/>.
-        /// </summary>
-        /// <param name="options"></param>
-        public delegate void ConfigureAsyncMediatorOptions(AsyncMediatorOptions options);
-
-        /// <summary>
         /// Adds an <see cref="AsyncMediator"/> with default <see cref="AsyncMediatorOptions"/>.
         /// </summary>
         public static IServiceCollection AddMediator(this IServiceCollection services) => services.AddMediator(_ => { });

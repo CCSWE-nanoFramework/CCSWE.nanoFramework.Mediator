@@ -22,6 +22,8 @@
   <ItemGroup>
     <Compile Include="AsyncMediator.cs" />
     <Compile Include="AsyncMediatorOptions.cs" />
+    <Compile Include="ConfigureAsyncMediatorOptions.cs" />
+    <Compile Include="Extensions\HostBuilderExtensions.cs" />
     <Compile Include="Extensions\ServiceCollectionExtensions.cs" />
     <Compile Include="IMediator.cs" />
     <Compile Include="IMediatorEvent.cs" />
@@ -36,6 +38,9 @@
     </Reference>
     <Reference Include="nanoFramework.DependencyInjection">
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.0.35\lib\nanoFramework.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="nanoFramework.Hosting">
+      <HintPath>..\packages\nanoFramework.Hosting.1.0.25\lib\nanoFramework.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.Logging">
       <HintPath>..\packages\nanoFramework.Logging.1.1.63\lib\nanoFramework.Logging.dll</HintPath>
