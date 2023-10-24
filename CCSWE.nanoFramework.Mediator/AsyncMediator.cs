@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Threading;
 using CCSWE.nanoFramework.Mediator.Internal;
+using Microsoft.Extensions.Logging;
 
 namespace CCSWE.nanoFramework.Mediator
 {
@@ -14,6 +15,7 @@ namespace CCSWE.nanoFramework.Mediator
         private readonly Queue _eventQueue = new();
         private readonly AutoResetEvent _eventWaiting = new(false);
         private Thread? _publishThread;
+        private readonly ILogger _logger;
         private readonly IServiceProvider _serviceProvider;
         private readonly Hashtable _subscribers = new();
         private readonly Hashtable _subscriberTypes = new();
@@ -22,19 +24,14 @@ namespace CCSWE.nanoFramework.Mediator
         /// <summary>
         /// Create a new instance of <see cref="AsyncMediator"/>
         /// </summary>
-        /// <param name="serviceProvider">The <see cref="IServiceProvider"/> use to location singleton subscribers.</param>
-        public AsyncMediator(IServiceProvider serviceProvider) 
-        {
-            _serviceProvider = serviceProvider;
-        }
-
-        /// <summary>
-        /// Create a new instance of <see cref="AsyncMediator"/>
-        /// </summary>
         /// <param name="options">The <see cref="AsyncMediatorOptions"/> used to configure this <see cref="AsyncMediator"/>.</param>
+        /// <param name="logger">The <see cref="ILogger"/> to log events to.</param>
         /// <param name="serviceProvider">The <see cref="IServiceProvider"/> use to location singleton subscribers.</param>
-        public AsyncMediator(AsyncMediatorOptions options, IServiceProvider serviceProvider): this(serviceProvider)
+        public AsyncMediator(AsyncMediatorOptions options, ILogger logger, IServiceProvider serviceProvider)
         {
+            _logger = logger;
+            _serviceProvider = serviceProvider;
+        
             foreach (MediatorOptionsSubscriber subscriber in options.Subscribers)
             {
                 Subscribe(subscriber.EventType, subscriber.SubscriberType);
@@ -116,6 +113,8 @@ namespace CCSWE.nanoFramework.Mediator
 
             lock (_syncLock)
             {
+                _logger.LogTrace($"[{nameof(AsyncMediator)}] Queueing event {mediatorEvent.GetType().Name}");
+
                 _eventQueue.Enqueue(mediatorEvent);
                 _eventWaiting.Set();
             }
@@ -154,10 +153,14 @@ namespace CCSWE.nanoFramework.Mediator
             {
                 _eventWaiting.WaitOne();
 
+
+
                 var eventToPublish = DequeueEvent();
 
                 while (eventToPublish is not null)
                 {
+                    _logger.LogTrace($"[{nameof(AsyncMediator)}] Publishing event {eventToPublish.GetType().Name}");
+
                     PublishInternal(eventToPublish);
 
                     eventToPublish = DequeueEvent();
@@ -177,6 +180,8 @@ namespace CCSWE.nanoFramework.Mediator
                         return;
                     }
 
+                    _logger.LogTrace($"[{nameof(AsyncMediator)}] Starting publisher thread");
+
                     _publishThread = new Thread(PublishThread);
                     _publishThread.Start();
                 }
@@ -193,6 +198,8 @@ namespace CCSWE.nanoFramework.Mediator
             {
                 return;
             }
+
+            _logger.LogTrace($"[{nameof(AsyncMediator)}] Stopping publisher thread");
 
             try
             {
@@ -212,6 +219,8 @@ namespace CCSWE.nanoFramework.Mediator
         {
             MediatorTypeUtils.RequireMediatorEvent(eventType);
 
+            _logger.LogTrace($"[{nameof(AsyncMediator)}] Adding subscriber: {eventType.Name} - {eventHandler.GetType().Name}");
+         
             var eventName = eventType.FullName;
             if (!_subscribers.Contains(eventName))
             {
@@ -224,13 +233,16 @@ namespace CCSWE.nanoFramework.Mediator
             {
                 subscribers.Add(eventHandler);
             }
+
         }
 
         /// <inheritdoc />
         public void Subscribe(Type eventType, Type subscriberType)
         {
             MediatorTypeUtils.RequireMediatorEvent(eventType);
-           
+
+            _logger.LogTrace($"[{nameof(AsyncMediator)}] Adding subscriber: {eventType.Name} - {subscriberType.Name}");
+
             var eventName = eventType.FullName;
             if (!_subscriberTypes.Contains(eventName))
             {
@@ -248,6 +260,8 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Unsubscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
+            _logger.LogTrace($"[{nameof(AsyncMediator)}] Removing subscriber: {eventType.Name} - {eventHandler.GetType().Name}");
+         
             var eventName = eventType.FullName;
             if (!_subscribers.Contains(eventName))
             {
@@ -264,6 +278,8 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Unsubscribe(Type eventType, Type subscriberType)
         {
+            _logger.LogTrace($"[{nameof(AsyncMediator)}] Removing subscriber: {eventType.Name} - {subscriberType.Name}");
+          
             var eventName = eventType.FullName;
             if (!_subscriberTypes.Contains(eventName))
             {

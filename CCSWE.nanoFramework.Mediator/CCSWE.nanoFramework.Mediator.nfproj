@@ -37,6 +37,9 @@
     <Reference Include="nanoFramework.DependencyInjection">
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.0.35\lib\nanoFramework.DependencyInjection.dll</HintPath>
     </Reference>
+    <Reference Include="nanoFramework.Logging">
+      <HintPath>..\packages\nanoFramework.Logging.1.1.63\lib\nanoFramework.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="nanoFramework.System.Collections">
       <HintPath>..\packages\nanoFramework.System.Collections.1.5.18\lib\nanoFramework.System.Collections.dll</HintPath>
     </Reference>
@@ -60,5 +63,5 @@
     <Error Condition="!Exists('..\packages\Nerdbank.GitVersioning.3.6.133\build\Nerdbank.GitVersioning.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Nerdbank.GitVersioning.3.6.133\build\Nerdbank.GitVersioning.props'))" />
     <Error Condition="!Exists('..\packages\Nerdbank.GitVersioning.3.6.133\build\Nerdbank.GitVersioning.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Nerdbank.GitVersioning.3.6.133\build\Nerdbank.GitVersioning.targets'))" />
   </Target>
-  <Import Project="..\packages\Nerdbank.GitVersioning.3.6.133\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\packages\Nerdbank.GitVersioning.3.6.133\build\Nerdbank.GitVersioning.targets')" />  
+  <Import Project="..\packages\Nerdbank.GitVersioning.3.6.133\build\Nerdbank.GitVersioning.targets" Condition="Exists('..\packages\Nerdbank.GitVersioning.3.6.133\build\Nerdbank.GitVersioning.targets')" />
 </Project>

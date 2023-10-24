@@ -1,5 +1,4 @@
-﻿using System;
-using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
+﻿using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
 using nanoFramework.DependencyInjection;
 using nanoFramework.TestFramework;
 
