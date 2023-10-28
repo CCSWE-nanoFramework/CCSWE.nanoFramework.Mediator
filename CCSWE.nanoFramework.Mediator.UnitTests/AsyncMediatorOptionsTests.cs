@@ -5,8 +5,6 @@ using nanoFramework.TestFramework;
 
 namespace CCSWE.nanoFramework.Mediator.UnitTests
 {
-    // TODO: Add tests to validate parameter checking
-
     [TestClass]
     public class AsyncMediatorOptionsTests
     {
@@ -31,6 +29,32 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
 
             // Act
             Assert.ThrowsException(typeof(ArgumentException), () => sut.AddSubscriber(typeof(ArrayList), typeof(MediatorEventHandlerMock)));
+
+            // Assert
+            Assert.AreEqual(0, sut.Subscribers.Count);
+        }
+
+        [TestMethod]
+        public void AddSubscription_should_throw_exception_for_null_event_type()
+        {
+            // Arrange
+            var sut = new AsyncMediatorOptions();
+
+            // Act
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.AddSubscriber(null, typeof(MediatorEventHandlerMock)));
+
+            // Assert
+            Assert.AreEqual(0, sut.Subscribers.Count);
+        }
+
+        [TestMethod]
+        public void AddSubscription_should_throw_exception_for_null_subscriber_type()
+        {
+            // Arrange
+            var sut = new AsyncMediatorOptions();
+
+            // Act
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.AddSubscriber(typeof(ArrayList), null));
 
             // Assert
             Assert.AreEqual(0, sut.Subscribers.Count);

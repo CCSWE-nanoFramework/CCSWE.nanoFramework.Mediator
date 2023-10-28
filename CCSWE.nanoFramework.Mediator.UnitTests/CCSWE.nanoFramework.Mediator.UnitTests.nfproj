@@ -36,6 +36,7 @@
     <Compile Include="Mocks\LoggerMock.cs" />
     <Compile Include="Mocks\MediatorEventMock.cs" />
     <Compile Include="Mocks\MediatorEventHandlerMock.cs" />
+    <Compile Include="Mocks\ServiceProviderMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

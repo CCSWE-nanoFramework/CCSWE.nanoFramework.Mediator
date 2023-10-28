@@ -1,4 +1,5 @@
 ﻿using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
+using Microsoft.Extensions.Logging;
 using nanoFramework.DependencyInjection;
 using nanoFramework.TestFramework;
 
@@ -7,12 +8,6 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions
     [TestClass]
     public class ServiceCollectionExtensionsTests
     {
-        [Setup]
-        public void Setup()
-        {
-            Assert.SkipTest("These tests currently timeout. Come back to this");
-        }
-
         [TestMethod]
         public void AddMediator_should_configure_AsyncMediatorOptions()
         {
@@ -42,6 +37,7 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions
         {
             // Arrange
             var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton(typeof(ILogger), typeof(LoggerMock));
 
             // Act
             serviceCollection.AddMediator();
@@ -54,6 +50,9 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions
             Assert.IsNotNull(result1);
             Assert.IsInstanceOfType(result1, typeof(AsyncMediator));
             Assert.AreEqual(result1, result2);
+
+            var asyncMediator = (AsyncMediator)result1;
+            asyncMediator.Dispose();
         }
 
         [TestMethod]
