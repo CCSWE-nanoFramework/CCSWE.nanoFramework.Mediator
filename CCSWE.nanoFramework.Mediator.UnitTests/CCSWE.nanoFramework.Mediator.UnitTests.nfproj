@@ -30,6 +30,7 @@
   <ItemGroup>
     <Compile Include="AsyncMediatorOptionsTests.cs" />
     <Compile Include="AsyncMediatorTests.cs" />
+    <Compile Include="Extensions\HostBuilderExtensionsTests.cs" />
     <Compile Include="Extensions\ServiceCollectionExtensionsTests.cs" />
     <Compile Include="Internal\MediatorTypeUtilsTests.cs" />
     <Compile Include="Mocks\LoggerMock.cs" />

@@ -4,8 +4,9 @@ using nanoFramework.TestFramework;
 
 namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions
 {
+    /* TODO: Add unit tests
     [TestClass]
-    public class ServiceCollectionExtensionsTests
+    public class HostBuilderExtensionsTests
     {
         [Setup]
         public void Setup()
@@ -75,4 +76,5 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions
             Assert.AreEqual(result1, result2);
         }
     }
+    */
 }

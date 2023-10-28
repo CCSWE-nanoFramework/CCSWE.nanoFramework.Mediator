@@ -5,6 +5,8 @@ using nanoFramework.TestFramework;
 
 namespace CCSWE.nanoFramework.Mediator.UnitTests
 {
+    // TODO: Add tests to validate parameter checking
+
     [TestClass]
     public class AsyncMediatorOptionsTests
     {
