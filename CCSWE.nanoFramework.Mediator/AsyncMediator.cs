@@ -11,6 +11,8 @@ namespace CCSWE.nanoFramework.Mediator
     /// </summary>
     public class AsyncMediator : IMediator, IDisposable
     {
+        private bool _disposed;
+        private readonly object _lock = new();
         private readonly ILogger _logger;
         private readonly LogLevel _logLevel;
         private readonly ConsumerThreadPool _publishThreadPool;
@@ -42,6 +44,19 @@ namespace CCSWE.nanoFramework.Mediator
             _publishThreadPool = new ConsumerThreadPool(1, PublishThread);
         }
 
+        ~AsyncMediator()
+        {
+            Dispose(false);
+        }
+
+        private void CheckDisposed()
+        {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(nameof(AsyncMediator));
+            }
+        }
+
         private void DebugLog(string message)
         {
             if (string.IsNullOrEmpty(message) || !_logger.IsEnabled(_logLevel))
@@ -55,12 +70,43 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Dispose()
         {
-            _publishThreadPool.Dispose();
+            if (_disposed)
+            {
+                return;
+            }
+
+            lock (_lock)
+            {
+                if (_disposed)
+                {
+                    return;
+                }
+
+                Dispose(true);
+                GC.SuppressFinalize(this);
+            }
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _publishThreadPool.Dispose();
+            }
+
+            _disposed = true;
         }
 
         /// <inheritdoc />
         public void Publish(IMediatorEvent mediatorEvent)
         {
+            CheckDisposed();
+
             Ensure.IsNotNull(nameof(mediatorEvent), mediatorEvent);
 
             _publishThreadPool.Enqueue(mediatorEvent);
