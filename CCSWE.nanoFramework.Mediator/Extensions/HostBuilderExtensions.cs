@@ -9,14 +9,9 @@ namespace CCSWE.nanoFramework.Mediator
     public static class HostBuilderExtensions
     {
         /// <summary>
-        /// Adds an <see cref="AsyncMediator"/> with default <see cref="AsyncMediatorOptions"/>.
-        /// </summary>
-        public static IHostBuilder UseMediator(this IHostBuilder builder) => builder.UseMediator(_ => { });
-
-        /// <summary>
         /// Adds an <see cref="AsyncMediator"/> with the specified <see cref="AsyncMediatorOptions"/>.
         /// </summary>
-        public static IHostBuilder UseMediator(this IHostBuilder builder, ConfigureAsyncMediatorOptions configureOptions)
+        public static IHostBuilder UseMediator(this IHostBuilder builder, ConfigureAsyncMediatorOptions? configureOptions = null)
         {
             builder.ConfigureServices(services => services.AddMediator(configureOptions));
 

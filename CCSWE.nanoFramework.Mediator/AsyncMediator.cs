@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Threading;
 using CCSWE.nanoFramework.Mediator.Internal;
+using CCSWE.nanoFramework.Threading;
 using Microsoft.Extensions.Logging;
 
 namespace CCSWE.nanoFramework.Mediator
@@ -12,15 +12,13 @@ namespace CCSWE.nanoFramework.Mediator
     public class AsyncMediator : IMediator, IDisposable
     {
         private bool _disposed;
-        private readonly Queue _eventQueue = new();
-        private readonly AutoResetEvent _eventWaiting = new(false);
-        private Thread? _publishThread;
+        private readonly object _lock = new();
         private readonly ILogger _logger;
         private readonly LogLevel _logLevel;
+        private readonly ConsumerThreadPool _publishThreadPool;
         private readonly IServiceProvider _serviceProvider;
         private readonly Hashtable _subscribers = new();
         private readonly Hashtable _subscriberTypes = new();
-        private readonly object _syncLock = new();
 
         /// <summary>
         /// Create a new instance of <see cref="AsyncMediator"/>
@@ -30,6 +28,10 @@ namespace CCSWE.nanoFramework.Mediator
         /// <param name="serviceProvider">The <see cref="IServiceProvider"/> use to location singleton subscribers.</param>
         public AsyncMediator(AsyncMediatorOptions options, ILogger logger, IServiceProvider serviceProvider)
         {
+            Ensure.IsNotNull(nameof(options), options);
+            Ensure.IsNotNull(nameof(logger), logger);
+            Ensure.IsNotNull(nameof(serviceProvider), serviceProvider);
+
             _logLevel = options.LogLevel;
             _logger = logger;
             _serviceProvider = serviceProvider;
@@ -39,29 +41,19 @@ namespace CCSWE.nanoFramework.Mediator
                 Subscribe(subscriber.EventType, subscriber.SubscriberType);
             }
 
-            if (!options.DelayedStart)
-            {
-                Start();
-            }
+            _publishThreadPool = new ConsumerThreadPool(1, PublishThread);
         }
 
-        /// <summary>
-        /// No summary needed...
-        /// </summary>
         ~AsyncMediator()
         {
             Dispose(false);
         }
 
-        private CancellationToken CancellationToken => CancellationTokenSource.Token;
-
-        private CancellationTokenSource CancellationTokenSource { get; } = new();
-
-        private void CheckPublishThread()
+        private void CheckDisposed()
         {
-            if (_publishThread is null && !CancellationToken.IsCancellationRequested)
+            if (_disposed)
             {
-                Start();
+                throw new ObjectDisposedException(nameof(AsyncMediator));
             }
         }
 
@@ -75,14 +67,6 @@ namespace CCSWE.nanoFramework.Mediator
             _logger.Log(_logLevel, $"[{nameof(AsyncMediator)}] {message}");
         }
 
-        private IMediatorEvent? DequeueEvent()
-        {
-            lock (_syncLock)
-            {
-                return _eventQueue.Count > 0 ? _eventQueue.Dequeue() as IMediatorEvent : null;
-            }
-        }
-
         /// <inheritdoc />
         public void Dispose()
         {
@@ -91,7 +75,7 @@ namespace CCSWE.nanoFramework.Mediator
                 return;
             }
 
-            lock (_syncLock)
+            lock (_lock)
             {
                 if (_disposed)
                 {
@@ -112,7 +96,7 @@ namespace CCSWE.nanoFramework.Mediator
 
             if (disposing)
             {
-                Stop();
+                _publishThreadPool.Dispose();
             }
 
             _disposed = true;
@@ -121,15 +105,11 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Publish(IMediatorEvent mediatorEvent)
         {
-            CheckPublishThread();
+            CheckDisposed();
 
-            lock (_syncLock)
-            {
-                DebugLog($"Queueing event {mediatorEvent.GetType().Name}");
+            Ensure.IsNotNull(nameof(mediatorEvent), mediatorEvent);
 
-                _eventQueue.Enqueue(mediatorEvent);
-                _eventWaiting.Set();
-            }
+            _publishThreadPool.Enqueue(mediatorEvent);
         }
 
         private void PublishInternal(IMediatorEvent mediatorEvent)
@@ -161,76 +141,22 @@ namespace CCSWE.nanoFramework.Mediator
             }
         }
 
-        private void PublishThread()
+        private void PublishThread(object state)
         {
-            while (!CancellationToken.IsCancellationRequested)
-            {
-                _eventWaiting.WaitOne();
-
-
-
-                var eventToPublish = DequeueEvent();
-
-                while (eventToPublish is not null)
-                {
-                    DebugLog($"Publishing event {eventToPublish.GetType().Name}");
-
-                    PublishInternal(eventToPublish);
-
-                    eventToPublish = DequeueEvent();
-                }
-            }
-        }
-
-        internal void Start()
-        {
-            // ReSharper disable once InvertIf
-            if (_publishThread is null)
-            {
-                lock (_syncLock)
-                {
-                    if (_publishThread is not null)
-                    {
-                        return;
-                    }
-
-                    DebugLog($"Starting publisher thread");
-
-                    _publishThread = new Thread(PublishThread);
-                    _publishThread.Start();
-                }
-            }
-        }
-
-        internal void Stop()
-        {
-            CancellationTokenSource.Cancel();
-
-            _eventWaiting.Set();
-
-            if (_publishThread is null)
+            if (state is not IMediatorEvent mediatorEvent)
             {
                 return;
             }
 
-            DebugLog($"Stopping publisher thread");
-
-            try
-            {
-                if (Thread.CurrentThread != _publishThread)
-                {
-                    _publishThread.Join(10_000);
-                }
-            }
-            finally
-            {
-                _publishThread = null;
-            }
+            PublishInternal(mediatorEvent);
         }
 
         /// <inheritdoc />
         public void Subscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
+            Ensure.IsNotNull(nameof(eventType), eventType);
+            Ensure.IsNotNull(nameof(eventHandler), eventHandler);
+
             MediatorTypeUtils.RequireMediatorEvent(eventType);
 
             DebugLog($"Adding subscriber: {eventType.Name} - {eventHandler.GetType().Name}");
@@ -253,6 +179,9 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Subscribe(Type eventType, Type subscriberType)
         {
+            Ensure.IsNotNull(nameof(eventType), eventType);
+            Ensure.IsNotNull(nameof(subscriberType), subscriberType);
+
             MediatorTypeUtils.RequireMediatorEvent(eventType);
 
             DebugLog($"Adding subscriber: {eventType.Name} - {subscriberType.Name}");
@@ -274,6 +203,9 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Unsubscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
+            Ensure.IsNotNull(nameof(eventType), eventType);
+            Ensure.IsNotNull(nameof(eventHandler), eventHandler);
+
             DebugLog($"Removing subscriber: {eventType.Name} - {eventHandler.GetType().Name}");
          
             var eventName = eventType.FullName;
@@ -292,6 +224,9 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Unsubscribe(Type eventType, Type subscriberType)
         {
+            Ensure.IsNotNull(nameof(eventType), eventType);
+            Ensure.IsNotNull(nameof(subscriberType), subscriberType);
+
             DebugLog($"Removing subscriber: {eventType.Name} - {subscriberType.Name}");
           
             var eventName = eventType.FullName;

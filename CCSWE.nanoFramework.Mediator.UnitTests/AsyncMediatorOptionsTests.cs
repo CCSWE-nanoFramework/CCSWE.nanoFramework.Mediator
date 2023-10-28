@@ -33,5 +33,31 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             // Assert
             Assert.AreEqual(0, sut.Subscribers.Count);
         }
+
+        [TestMethod]
+        public void AddSubscription_should_throw_exception_for_null_event_type()
+        {
+            // Arrange
+            var sut = new AsyncMediatorOptions();
+
+            // Act
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.AddSubscriber(null, typeof(MediatorEventHandlerMock)));
+
+            // Assert
+            Assert.AreEqual(0, sut.Subscribers.Count);
+        }
+
+        [TestMethod]
+        public void AddSubscription_should_throw_exception_for_null_subscriber_type()
+        {
+            // Arrange
+            var sut = new AsyncMediatorOptions();
+
+            // Act
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.AddSubscriber(typeof(ArrayList), null));
+
+            // Assert
+            Assert.AreEqual(0, sut.Subscribers.Count);
+        }
     }
 }
