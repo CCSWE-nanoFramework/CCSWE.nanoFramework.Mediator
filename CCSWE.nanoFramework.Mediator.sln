@@ -12,8 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{661E1AA0-550C-40E0-807A-95B6453C482E}"
 	ProjectSection(SolutionItems) = preProject
 		.github\config.yml = .github\config.yml
-		.github\workflows\nf-build-and-publish.yml = .github\workflows\nf-build-and-publish.yml
-		.github\workflows\nf-update-dependencies.yml = .github\workflows\nf-update-dependencies.yml
+		.github\workflows\build-solution.yml = .github\workflows\build-solution.yml
+		.github\workflows\update-dependencies.yml = .github\workflows\update-dependencies.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{5187F0EE-3F0C-455D-AA27-85D94B192116}"
@@ -22,6 +22,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{5187F0EE
 		Directory.Build.props = Directory.Build.props
 		nuget.config = nuget.config
 		version.json = version.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{7005C84C-B850-4BDC-A94F-65DC6E994C97}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		LICENSE.md = LICENSE.md
 	EndProjectSection
 EndProject
 Global
@@ -49,6 +55,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{661E1AA0-550C-40E0-807A-95B6453C482E} = {FE4D86DD-6E0A-4D33-A91A-728292495EF6}
 		{5187F0EE-3F0C-455D-AA27-85D94B192116} = {FE4D86DD-6E0A-4D33-A91A-728292495EF6}
+		{7005C84C-B850-4BDC-A94F-65DC6E994C97} = {FE4D86DD-6E0A-4D33-A91A-728292495EF6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE56B956-7F19-4F5C-A578-4CA03B448964}
