@@ -1,4 +1,7 @@
-#  CCSWE.nanoFramework.Mediator
+[![Build](https://github.com/CoryCharlton/CCSWE.nanoFramework.Mediator/actions/workflows/build-solution.yml/badge.svg)](https://github.com/CoryCharlton/CCSWE.nanoFramework.Mediator/actions/workflows/build-solution.yml) [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![NuGet](https://img.shields.io/nuget/dt/CCSWE.nanoFramework.Mediator.svg?label=NuGet&style=flat&logo=nuget)](https://www.nuget.org/packages/CCSWE.nanoFramework.Mediator/) 
+
+# CCSWE.nanoFramework.Mediator
+
 A simple asynchronous mediator implementation for nanoFramework. Provides in-process publisher-subscriber communication while keeping all parties decoupled.
 
 Based on [Mako-IoT.Device.Services.Mediator](https://github.com/CShark-Hub/Mako-IoT.Device.Services.Mediator)

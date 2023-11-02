@@ -34,6 +34,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent">
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.0.4.2\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+    </Reference>
     <Reference Include="CCSWE.nanoFramework.Collections.Concurrent, Version=0.4.1.44694, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.0.4.1\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
       <Private>True</Private>
@@ -71,6 +74,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.lock.json" />
   </ItemGroup>
   <Import Project="$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets" Condition="Exists('$(NanoFrameworkProjectSystemPath)NFProjectSystem.CSharp.targets')" />
   <ProjectExtensions>
