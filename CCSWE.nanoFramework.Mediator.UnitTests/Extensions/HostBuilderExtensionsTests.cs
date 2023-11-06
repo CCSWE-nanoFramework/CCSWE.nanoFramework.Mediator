@@ -1,4 +1,5 @@
 ﻿using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using nanoFramework.Hosting;
 using nanoFramework.TestFramework;

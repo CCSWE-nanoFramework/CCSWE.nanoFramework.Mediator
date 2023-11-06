@@ -34,9 +34,9 @@
       },
       "nanoFramework.Hosting": {
         "type": "Direct",
-        "requested": "[1.0.25, 1.0.25]",
-        "resolved": "1.0.25",
-        "contentHash": "eNHLCVaJjCZOmr/xutnHovLFk1DGhtSkx7CMRtcNiSUIy/AfsYYR+pM43zDgfiOB+QsEreQ/q8HgsXm98nEwCg=="
+        "requested": "[1.0.38, 1.0.38]",
+        "resolved": "1.0.38",
+        "contentHash": "ydmbos1XzgfAl29kKvf7SY2hnScerU4Tih4gf+nwZc9OH9R3+hhZP61sCCP/KmpXMdSci6a2Q5WB5RIpfONRRg=="
       },
       "nanoFramework.Logging": {
         "type": "Direct",

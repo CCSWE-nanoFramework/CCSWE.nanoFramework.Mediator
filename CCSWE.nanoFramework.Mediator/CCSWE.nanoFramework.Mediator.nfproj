@@ -53,7 +53,7 @@
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.1\lib\nanoFramework.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.Hosting">
-      <HintPath>..\packages\nanoFramework.Hosting.1.0.25\lib\nanoFramework.Hosting.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.Hosting.1.0.38\lib\nanoFramework.Hosting.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.Logging">
       <HintPath>..\packages\nanoFramework.Logging.1.1.63\lib\nanoFramework.Logging.dll</HintPath>
