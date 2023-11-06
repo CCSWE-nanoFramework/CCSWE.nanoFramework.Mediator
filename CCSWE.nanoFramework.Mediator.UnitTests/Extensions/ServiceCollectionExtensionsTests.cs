@@ -1,6 +1,6 @@
 ﻿using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using nanoFramework.DependencyInjection;
 using nanoFramework.TestFramework;
 
 namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions

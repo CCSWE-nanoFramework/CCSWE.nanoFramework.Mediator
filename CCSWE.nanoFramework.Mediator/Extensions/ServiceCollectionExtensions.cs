@@ -1,4 +1,4 @@
-﻿using nanoFramework.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 // ReSharper disable once CheckNamespace
 namespace CCSWE.nanoFramework.Mediator

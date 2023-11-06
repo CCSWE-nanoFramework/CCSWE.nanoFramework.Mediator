@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Threading;
 using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
-using nanoFramework.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CCSWE.nanoFramework.Mediator.UnitTests
 {
