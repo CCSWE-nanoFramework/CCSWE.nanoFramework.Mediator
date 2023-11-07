@@ -44,6 +44,9 @@ namespace CCSWE.nanoFramework.Mediator
             _publishThreadPool = new ConsumerThreadPool(1, PublishThread);
         }
 
+        /// <summary>
+        /// Finalizes the <see cref="AsyncMediator"/>.
+        /// </summary>
         ~AsyncMediator()
         {
             Dispose(false);
