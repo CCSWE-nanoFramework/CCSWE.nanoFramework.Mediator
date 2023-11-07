@@ -41,7 +41,7 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             var sut = new AsyncMediatorOptions();
 
             // Act
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.AddSubscriber(null, typeof(MediatorEventHandlerMock)));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.AddSubscriber(null!, typeof(MediatorEventHandlerMock)));
 
             // Assert
             Assert.AreEqual(0, sut.Subscribers.Count);
@@ -54,7 +54,7 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             var sut = new AsyncMediatorOptions();
 
             // Act
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.AddSubscriber(typeof(ArrayList), null));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.AddSubscriber(typeof(ArrayList), null!));
 
             // Assert
             Assert.AreEqual(0, sut.Subscribers.Count);

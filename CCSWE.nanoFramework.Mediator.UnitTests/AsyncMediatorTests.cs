@@ -5,6 +5,7 @@ using System.Threading;
 using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
 using Microsoft.Extensions.DependencyInjection;
 
+// ReSharper disable AccessToDisposedClosure
 namespace CCSWE.nanoFramework.Mediator.UnitTests
 {
     [TestClass]
@@ -19,7 +20,7 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             using var sut = new AsyncMediator(new AsyncMediatorOptions(), new LoggerMock(), new ServiceProviderMock());
 
             // Act
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Publish(null));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Publish(null!));
         }
 
         [TestMethod]
@@ -82,8 +83,8 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             using var sut = new AsyncMediator(new AsyncMediatorOptions(), new LoggerMock(), new ServiceProviderMock());
 
             // Act
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Subscribe(null, typeof(MediatorEventHandlerMock)));
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Subscribe(null, new MediatorEventHandlerMock()));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Subscribe(null!, typeof(MediatorEventHandlerMock)));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Subscribe(null!, new MediatorEventHandlerMock()));
         }
 
         [TestMethod]
@@ -93,8 +94,8 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             using var sut = new AsyncMediator(new AsyncMediatorOptions(), new LoggerMock(), new ServiceProviderMock());
 
             // Act
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Subscribe(typeof(MediatorEventMock), (Type) null));
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Subscribe(typeof(MediatorEventMock), (IMediatorEventHandler) null));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Subscribe(typeof(MediatorEventMock), (Type) null!));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Subscribe(typeof(MediatorEventMock), (IMediatorEventHandler) null!));
         }
 
         [TestMethod]
@@ -149,8 +150,8 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             using var sut = new AsyncMediator(new AsyncMediatorOptions(), new LoggerMock(), new ServiceProviderMock());
 
             // Act
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Unsubscribe(null, typeof(MediatorEventHandlerMock)));
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Unsubscribe(null, new MediatorEventHandlerMock()));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Unsubscribe(null!, typeof(MediatorEventHandlerMock)));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Unsubscribe(null!, new MediatorEventHandlerMock()));
         }
 
         [TestMethod]
@@ -160,8 +161,8 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests
             using var sut = new AsyncMediator(new AsyncMediatorOptions(), new LoggerMock(), new ServiceProviderMock());
 
             // Act
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Unsubscribe(typeof(MediatorEventMock), (Type)null));
-            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Unsubscribe(typeof(MediatorEventMock), (IMediatorEventHandler)null));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Unsubscribe(typeof(MediatorEventMock), (Type)null!));
+            Assert.ThrowsException(typeof(ArgumentNullException), () => sut.Unsubscribe(typeof(MediatorEventMock), (IMediatorEventHandler)null!));
         }
 
         private static void WaitForPublisherThread()

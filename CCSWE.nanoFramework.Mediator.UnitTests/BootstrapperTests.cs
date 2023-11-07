@@ -1,27 +1,26 @@
 ﻿using CCSWE.nanoFramework.Mediator.UnitTests.Mocks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using nanoFramework.Hosting;
 using nanoFramework.TestFramework;
 
-namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions
+namespace CCSWE.nanoFramework.Mediator.UnitTests
 {
     [TestClass]
-    public class HostBuilderExtensionsTests
+    public class BootstrapperTests
     {
         [TestMethod]
-        public void UseMediator_should_configure_AsyncMediatorOptions()
+        public void AddMediator_should_configure_AsyncMediatorOptions()
         {
             // Arrange
-            var hostBuilder = new HostBuilder();
+            var serviceCollection = new ServiceCollection();
 
             // Act
-            hostBuilder.UseMediator(options =>
+            serviceCollection.AddMediator(options =>
             {
                 options.AddSubscriber(typeof(MediatorEventMock), typeof(IMediatorEventHandlerMock));
             });
 
-            var serviceProvider = hostBuilder.Build().Services;
+            var serviceProvider = serviceCollection.BuildServiceProvider();
             var result = serviceProvider.GetService(typeof(AsyncMediatorOptions));
 
             // Assert
@@ -34,16 +33,16 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions
         }
 
         [TestMethod]
-        public void UseMediator_should_register_AsyncMediator()
+        public void AddMediator_should_register_AsyncMediator()
         {
             // Arrange
-            var hostBuilder = new HostBuilder();
-            hostBuilder.ConfigureServices(services => services.AddSingleton(typeof(ILogger), typeof(LoggerMock)));
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddSingleton(typeof(ILogger), typeof(LoggerMock));
 
             // Act
-            hostBuilder.UseMediator();
+            serviceCollection.AddMediator();
 
-            var serviceProvider = hostBuilder.Build().Services;
+            var serviceProvider = serviceCollection.BuildServiceProvider();
             var result1 = serviceProvider.GetService(typeof(IMediator));
             var result2 = serviceProvider.GetService(typeof(IMediator));
 
@@ -57,15 +56,15 @@ namespace CCSWE.nanoFramework.Mediator.UnitTests.Extensions
         }
 
         [TestMethod]
-        public void UseMediator_should_register_AsyncMediatorOptions()
+        public void AddMediator_should_register_AsyncMediatorOptions()
         {
             // Arrange
-            var hostBuilder = new HostBuilder();
+            var serviceCollection = new ServiceCollection();
 
             // Act
-            hostBuilder.UseMediator();
+            serviceCollection.AddMediator();
 
-            var serviceProvider = hostBuilder.Build().Services;
+            var serviceProvider = serviceCollection.BuildServiceProvider();
             var result1 = serviceProvider.GetService(typeof(AsyncMediatorOptions));
             var result2 = serviceProvider.GetService(typeof(AsyncMediatorOptions));
 

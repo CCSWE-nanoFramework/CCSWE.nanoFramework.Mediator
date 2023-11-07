@@ -6,7 +6,7 @@ namespace CCSWE.nanoFramework.Mediator
     /// <summary>
     /// Extension methods for <see cref="AsyncMediator"/>.
     /// </summary>
-    public static class ServiceCollectionExtensions
+    public static class Bootstrapper
     {
         /// <summary>
         /// Adds an <see cref="AsyncMediator"/> with the specified <see cref="AsyncMediatorOptions"/>.
