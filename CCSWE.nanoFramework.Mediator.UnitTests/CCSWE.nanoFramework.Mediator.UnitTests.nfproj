@@ -40,8 +40,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="mscorlib">
-      <HintPath>..\packages\nanoFramework.CoreLibrary.1.14.2\lib\mscorlib.dll</HintPath>
+    <Reference Include="mscorlib, Version=1.14.20.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.CoreLibrary.1.14.20\lib\mscorlib.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="nanoFramework.DependencyInjection">
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.1\lib\nanoFramework.DependencyInjection.dll</HintPath>
