@@ -11,23 +11,22 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{661E1AA0-550C-40E0-807A-95B6453C482E}"
 	ProjectSection(SolutionItems) = preProject
-		.github\config.yml = .github\config.yml
 		.github\workflows\build-solution.yml = .github\workflows\build-solution.yml
+		.github\config.yml = .github\config.yml
+		.github\workflows\pull-request-checks.yml = .github\workflows\pull-request-checks.yml
 		.github\workflows\update-dependencies.yml = .github\workflows\update-dependencies.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{5187F0EE-3F0C-455D-AA27-85D94B192116}"
 	ProjectSection(SolutionItems) = preProject
 		CCSWE.nanoFramework.Mediator.nuspec = CCSWE.nanoFramework.Mediator.nuspec
-		Directory.Build.props = Directory.Build.props
-		nuget.config = nuget.config
 		version.json = version.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{7005C84C-B850-4BDC-A94F-65DC6E994C97}"
 	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
 		LICENSE.md = LICENSE.md
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
