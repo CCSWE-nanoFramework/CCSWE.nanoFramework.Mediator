@@ -40,9 +40,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="mscorlib, Version=1.14.3.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
-      <HintPath>..\packages\nanoFramework.CoreLibrary.1.14.2\lib\mscorlib.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="mscorlib">
+      <HintPath>..\packages\nanoFramework.CoreLibrary.1.15.5\lib\mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.DependencyInjection">
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.1\lib\nanoFramework.DependencyInjection.dll</HintPath>
@@ -51,10 +50,10 @@
       <HintPath>..\packages\nanoFramework.Logging.1.1.63\lib\nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.TestFramework">
-      <HintPath>..\packages\nanoFramework.TestFramework.2.1.85\lib\nanoFramework.TestFramework.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.TestFramework.2.1.87\lib\nanoFramework.TestFramework.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.UnitTestLauncher">
-      <HintPath>..\packages\nanoFramework.TestFramework.2.1.85\lib\nanoFramework.UnitTestLauncher.exe</HintPath>
+      <HintPath>..\packages\nanoFramework.TestFramework.2.1.87\lib\nanoFramework.UnitTestLauncher.exe</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
