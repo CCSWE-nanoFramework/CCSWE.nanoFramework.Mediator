@@ -44,10 +44,10 @@
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.15.5\lib\mscorlib.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.DependencyInjection">
-      <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.1\lib\nanoFramework.DependencyInjection.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.3\lib\nanoFramework.DependencyInjection.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.Logging">
-      <HintPath>..\packages\nanoFramework.Logging.1.1.63\lib\nanoFramework.Logging.dll</HintPath>
+      <HintPath>..\packages\nanoFramework.Logging.1.1.74\lib\nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.TestFramework">
       <HintPath>..\packages\nanoFramework.TestFramework.2.1.87\lib\nanoFramework.TestFramework.dll</HintPath>
