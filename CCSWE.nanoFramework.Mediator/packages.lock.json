@@ -16,9 +16,9 @@
       },
       "CCSWE.nanoFramework.Threading": {
         "type": "Direct",
-        "requested": "[1.0.1, 1.0.1]",
-        "resolved": "1.0.1",
-        "contentHash": "FcOXeOYtBryR+Qyo6BYgWU8EWm9yt865LeM6QBM62OpKH4o3lHygFHuTbRU/4QqCpHOqKwi4VeVGusZXQGl/dQ=="
+        "requested": "[1.0.2, 1.0.2]",
+        "resolved": "1.0.2",
+        "contentHash": "J9M00OMPVYOXRZOaXj2oLZkePPRr9ogt1WBDoWRukiu81eMiebbAbYXFNCT7W9/ZEDjgtOKFRSvOE7smZAyVQg=="
       },
       "nanoFramework.CoreLibrary": {
         "type": "Direct",
