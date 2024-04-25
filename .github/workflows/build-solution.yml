@@ -19,7 +19,6 @@ jobs:
     env:
       BUILD_CONFIGURATION: 'Release'
       GITHUB_TOKEN: ${{ github.token }}
-      NUGET_PACKAGE_NAME: 'CCSWE.nanoFramework.Mediator'
       SOLUTION: 'CCSWE.nanoFramework.Mediator.sln'
 
     steps:
@@ -53,9 +52,16 @@ jobs:
       # TODO: Add tests
 
       - name: Build NuGet packages
-        run: nuget pack ${{ env.NUGET_PACKAGE_NAME }}.nuspec -Version ${{ env.NBGV_NuGetPackageVersion }} -Symbols -SymbolPackageFormat snupkg -properties Configuration=${{ env.BUILD_CONFIGURATION }}
+        run: |
+          $files = Get-ChildItem -Filter *.nuspec
+          foreach ($file in $files) {
+            nuget pack $file.Name -Version ${{ env.NBGV_NuGetPackageVersion }} -Symbols -SymbolPackageFormat snupkg -properties Configuration=${{ env.BUILD_CONFIGURATION }}
+          }
 
-      - name: Publish NuGet packages to nuget.org
+      - name: Publish NuGet packages
         if: startsWith(github.ref, 'refs/heads/master')
         run: |
-          nuget push "**/${{ env.NUGET_PACKAGE_NAME }}*.nupkg" -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{ secrets.NUGET_ORG_API_KEY }} -SkipDuplicate
+          $files = Get-ChildItem -Filter *.nupkg
+          foreach ($file in $files) {
+            nuget push $file.Name -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{ secrets.NUGET_ORG_API_KEY }} -SkipDuplicate
+          }
