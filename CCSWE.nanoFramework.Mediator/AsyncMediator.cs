@@ -28,9 +28,9 @@ namespace CCSWE.nanoFramework.Mediator
         /// <param name="serviceProvider">The <see cref="IServiceProvider"/> use to location singleton subscribers.</param>
         public AsyncMediator(AsyncMediatorOptions options, ILogger logger, IServiceProvider serviceProvider)
         {
-            Ensure.IsNotNull(nameof(options), options);
-            Ensure.IsNotNull(nameof(logger), logger);
-            Ensure.IsNotNull(nameof(serviceProvider), serviceProvider);
+            Ensure.IsNotNull(options);
+            Ensure.IsNotNull(logger);
+            Ensure.IsNotNull(serviceProvider);
 
             _logLevel = options.LogLevel;
             _logger = logger;
@@ -110,7 +110,7 @@ namespace CCSWE.nanoFramework.Mediator
         {
             CheckDisposed();
 
-            Ensure.IsNotNull(nameof(mediatorEvent), mediatorEvent);
+            Ensure.IsNotNull(mediatorEvent);
 
             _publishThreadPool.Enqueue(mediatorEvent);
         }
@@ -157,8 +157,8 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Subscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
-            Ensure.IsNotNull(nameof(eventType), eventType);
-            Ensure.IsNotNull(nameof(eventHandler), eventHandler);
+            Ensure.IsNotNull(eventType);
+            Ensure.IsNotNull(eventHandler);
 
             MediatorTypeUtils.RequireMediatorEvent(eventType);
 
@@ -182,8 +182,8 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Subscribe(Type eventType, Type subscriberType)
         {
-            Ensure.IsNotNull(nameof(eventType), eventType);
-            Ensure.IsNotNull(nameof(subscriberType), subscriberType);
+            Ensure.IsNotNull(eventType);
+            Ensure.IsNotNull(subscriberType);
 
             MediatorTypeUtils.RequireMediatorEvent(eventType);
 
@@ -206,8 +206,8 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Unsubscribe(Type eventType, IMediatorEventHandler eventHandler)
         {
-            Ensure.IsNotNull(nameof(eventType), eventType);
-            Ensure.IsNotNull(nameof(eventHandler), eventHandler);
+            Ensure.IsNotNull(eventType);
+            Ensure.IsNotNull(eventHandler);
 
             DebugLog($"Removing subscriber: {eventType.Name} - {eventHandler.GetType().Name}");
          
@@ -227,8 +227,8 @@ namespace CCSWE.nanoFramework.Mediator
         /// <inheritdoc />
         public void Unsubscribe(Type eventType, Type subscriberType)
         {
-            Ensure.IsNotNull(nameof(eventType), eventType);
-            Ensure.IsNotNull(nameof(subscriberType), subscriberType);
+            Ensure.IsNotNull(eventType);
+            Ensure.IsNotNull(subscriberType);
 
             DebugLog($"Removing subscriber: {eventType.Name} - {subscriberType.Name}");
           
