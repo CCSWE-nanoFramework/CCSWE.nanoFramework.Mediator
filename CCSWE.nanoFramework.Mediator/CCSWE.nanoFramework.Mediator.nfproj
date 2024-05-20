@@ -41,7 +41,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="CCSWE.nanoFramework.Threading">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.0.17\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.0.18\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.15.5\lib\mscorlib.dll</HintPath>
