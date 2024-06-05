@@ -40,9 +40,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Threading.TestFramework, Version=1.0.21.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.TestFramework.1.0.21\lib\CCSWE.nanoFramework.Threading.TestFramework.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="CCSWE.nanoFramework.Threading.TestFramework">
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.TestFramework.1.0.23\lib\CCSWE.nanoFramework.Threading.TestFramework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.15.5\lib\mscorlib.dll</HintPath>
@@ -52,18 +51,15 @@
     </Reference>
     <Reference Include="nanoFramework.Logging, Version=1.1.100.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.Logging.1.1.100\lib\nanoFramework.Logging.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="nanoFramework.System.Runtime">
       <HintPath>..\packages\nanoFramework.System.Runtime.1.0.27\lib\nanoFramework.System.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.TestFramework, Version=2.1.104.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.TestFramework.2.1.104\lib\nanoFramework.TestFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="nanoFramework.UnitTestLauncher, Version=0.0.0.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.TestFramework.2.1.104\lib\nanoFramework.UnitTestLauncher.exe</HintPath>
-      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
