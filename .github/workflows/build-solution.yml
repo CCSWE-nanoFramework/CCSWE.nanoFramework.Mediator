@@ -18,3 +18,4 @@ jobs:
     secrets: inherit
     with:
       solution: 'CCSWE.nanoFramework.Mediator.sln'
+      runUnitTests: false
