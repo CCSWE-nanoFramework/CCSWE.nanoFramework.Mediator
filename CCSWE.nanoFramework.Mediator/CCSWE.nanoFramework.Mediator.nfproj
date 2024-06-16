@@ -42,8 +42,8 @@
       <HintPath>..\packages\CCSWE.nanoFramework.Core.1.0.22\lib\CCSWE.nanoFramework.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Threading, Version=1.0.27.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.0.27\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Threading, Version=1.0.28.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.0.28\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib">
