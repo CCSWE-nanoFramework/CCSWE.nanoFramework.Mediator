@@ -18,7 +18,7 @@
     <copyright>Copyright (c) Cory Charlton</copyright>
     <tags>nanoFramework C# csharp netmf netnf ccswe mediator</tags>
     <dependencies>
-      <dependency id="CCSWE.nanoFramework.Collections.Concurrent" version="1.0.20" />
+      <dependency id="CCSWE.nanoFramework.Collections.Concurrent" version="1.0.21" />
       <dependency id="CCSWE.nanoFramework.Core" version="1.0.23" />
       <dependency id="CCSWE.nanoFramework.Threading" version="1.0.29" />
       <dependency id="nanoFramework.CoreLibrary" version="1.15.5" />
