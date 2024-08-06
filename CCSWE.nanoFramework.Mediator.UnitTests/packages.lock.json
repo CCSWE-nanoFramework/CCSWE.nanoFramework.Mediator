@@ -4,9 +4,9 @@
     ".NETnanoFramework,Version=v1.0": {
       "CCSWE.nanoFramework.Threading.TestFramework": {
         "type": "Direct",
-        "requested": "[1.0.41, 1.0.41]",
-        "resolved": "1.0.41",
-        "contentHash": "2bYuXN+8x6ajZro63gBkdzWclJtdBPxTpYRBmisO0+LU9sHJfOZy9X9jPfyFbgOxBJUCoi3hGISbUimJxYANQQ=="
+        "requested": "[1.0.42, 1.0.42]",
+        "resolved": "1.0.42",
+        "contentHash": "E0WxmhAYF9oAA1M0j5B79NpoS8rQBbdM+rDwQELAmk8GYqIe2pzFPgZJR2WPf0xcUO1pO3e/nU+Nr+LN7Wcfdg=="
       },
       "nanoFramework.CoreLibrary": {
         "type": "Direct",
