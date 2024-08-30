@@ -40,8 +40,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Threading.TestFramework, Version=1.0.47.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.TestFramework.1.0.47\lib\CCSWE.nanoFramework.Threading.TestFramework.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Threading.TestFramework, Version=1.0.48.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.TestFramework.1.0.48\lib\CCSWE.nanoFramework.Threading.TestFramework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.15.5\lib\mscorlib.dll</HintPath>
