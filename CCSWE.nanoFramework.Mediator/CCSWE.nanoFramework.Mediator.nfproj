@@ -34,14 +34,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent, Version=1.0.48.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.0.48\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Collections.Concurrent, Version=1.0.50.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Collections.Concurrent.1.0.50\lib\CCSWE.nanoFramework.Collections.Concurrent.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Core, Version=1.0.47.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.0.47\lib\CCSWE.nanoFramework.Core.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Core, Version=1.0.48.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Core.1.0.48\lib\CCSWE.nanoFramework.Core.dll</HintPath>
     </Reference>
-    <Reference Include="CCSWE.nanoFramework.Threading, Version=1.0.69.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.0.69\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
+    <Reference Include="CCSWE.nanoFramework.Threading, Version=1.0.70.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CCSWE.nanoFramework.Threading.1.0.70\lib\CCSWE.nanoFramework.Threading.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>..\packages\nanoFramework.CoreLibrary.1.15.5\lib\mscorlib.dll</HintPath>
@@ -49,8 +49,8 @@
     <Reference Include="nanoFramework.DependencyInjection, Version=1.1.11.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.DependencyInjection.1.1.11\lib\nanoFramework.DependencyInjection.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.Logging, Version=1.1.124.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
-      <HintPath>..\packages\nanoFramework.Logging.1.1.124\lib\nanoFramework.Logging.dll</HintPath>
+    <Reference Include="nanoFramework.Logging, Version=1.1.125.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.Logging.1.1.125\lib\nanoFramework.Logging.dll</HintPath>
     </Reference>
     <Reference Include="nanoFramework.System.Collections, Version=1.5.45.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
       <HintPath>..\packages\nanoFramework.System.Collections.1.5.45\lib\nanoFramework.System.Collections.dll</HintPath>
@@ -58,8 +58,8 @@
     <Reference Include="nanoFramework.System.Runtime">
       <HintPath>..\packages\nanoFramework.System.Runtime.1.0.27\lib\nanoFramework.System.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="nanoFramework.System.Text">
-      <HintPath>..\packages\nanoFramework.System.Text.1.2.54\lib\nanoFramework.System.Text.dll</HintPath>
+    <Reference Include="nanoFramework.System.Text, Version=1.3.1.0, Culture=neutral, PublicKeyToken=c07d481e9758c731">
+      <HintPath>..\packages\nanoFramework.System.Text.1.3.1\lib\nanoFramework.System.Text.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading">
       <HintPath>..\packages\nanoFramework.System.Threading.1.1.32\lib\System.Threading.dll</HintPath>
